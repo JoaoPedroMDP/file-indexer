@@ -22,6 +22,6 @@ def hash_string(string):
     for letter in chars:
         hashed += ord(letter) % RANGE
 
-    print("{} ficará na posição {}".format(string, hashed % RANGE))
+    print("{} ficara na posicao {}".format(string, hashed % RANGE))
 
     return str(hashed % RANGE)
