@@ -1,21 +1,40 @@
 # coding: utf-8
-import click
+import argparse
 
 from utils import DEB_viz, sanitize_line, hash_string
 from trie import Trie
 
-@click.command("indexer")
-@click.option("--freq", "frequency")
-@click.option("--freq-word", "word_frequency")
-@click.option("--search", "search")
-@click.option("--word", "word")
-@click.argument('files', nargs=-1, type=click.Path(exists=True))
+parser = argparse.ArgumentParser()
+parser.add_argument("-f", "--freq",
+                    metavar = "freq",
+                    required = False,
+                    help = "Numero de ocorrencias das N palavras mais frequentes no documento passado em ordem decrescente"
+                    )
+parser.add_argument("-fw", "--freq-word",
+                    metavar = "freqword",
+                    required = False,
+                    help = "Contagem de uma palavra especifica no documento passado"
+                    )
+parser.add_argument("-s", "--search",
+                    metavar = "search",
+                    required = False,
+                    help = "Listagem dos documentos mais relevantes para um dado termo de busca"
+                    )
+parser.add_argument("files",
+                    nargs="*",
+                    help="Documentos passados para busca")
 
-def indexer(frequency, word_frequency, word, search, files):
+args = parser.parse_args()
+
+frequency = args.freq
+word_frequency = args.freq_word
+search = args.search
+files = args.files
+
+def indexer(frequency, word_frequency, search, files):
     print("freq: " + str(frequency))
     print("wordfreq: " + str(word_frequency))
     print("search: " + str(search))
-    print("word: " + str(word))
     print("files: " + str(files))
 
 def insert_line(line, file_name):
@@ -26,7 +45,7 @@ def insert_line(line, file_name):
             trie.insert_word(word, file_name)
 
 if __name__ == "__main__":
-    indexer()
+    indexer(frequency=frequency, word_frequency=word_frequency, search=search, files=files)
     trie = Trie()
 
     files = ["dummyTest1.txt", "dummyTest2.txt"]
