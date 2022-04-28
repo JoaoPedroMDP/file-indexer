@@ -1,7 +1,9 @@
+# coding: utf-8
 import click
-import re
 
-RANGE = 5
+from utils import DEB_viz, sanitize_line, hash_string
+from trie import Trie
+
 # @click.command("indexer")
 # @click.option("--freq", "frequency")
 # @click.option("--freq-word", "word_frequency")
@@ -16,90 +18,28 @@ RANGE = 5
 #     print("word: " + str(word))
 #     print("files: " + str(files))
 
-class Word:
-    def __init__(self, word):
-        self.word = word
-        self.amount = 1
 
-class Trie:
-    def __init__(self):
-        self.root = {} # inicializando raiz
-
-    def insert_word(self, word):
-        current_node = self.root
-
-        word = sanitize_word(word)
-
-        for letter in word:
-            if letter not in current_node:
-                current_node[letter] = {}
-            current_node = current_node[letter]
-        
-        word_obj = current_node.get("word", None)
-        if word_obj:
-            word_obj.amount += 1
-            # word_obj.insert_filename(filename)
-        else:
-            current_node["word"] = Word(word)
-    
-    def word_exists(self, word):
-        current_node = self.root
-
-        word = sanitize_word(word)
-
-        for letter in word:
-            if letter not in current_node:
-                return False
-            current_node = current_node[letter]
-        
-        return "word" in current_node
-
-# NÃO ESTÁ FUNCIONANDO AINDA
-# def hash_string(string):
-#     hashed = 0
-#     chars = [char for char in string]
-#     for letter in chars:
-#         hashed += ord(letter) % RANGE
-
-#     print("{} ficará na posição {}".format(string, hashed % RANGE))
-
-#     return str(hashed % RANGE)
-
-def sanitize_line(line):
-    return line.replace("-", " ")
-
-def sanitize_word(word):
-    reg = re.compile("[^a-zA-Z ]")
-    return reg.sub("", word).lower()
-
-def DEB_viz(object):
-    from lolviz import objviz
-    viz = objviz(object)
-    viz.view()
-
-
-def insert_line(line):
+def insert_line(line, file_name):
     line = sanitize_line(line)
 
     for word in line.split():
         if len(word) >= 2:
-            trie.insert_word(word)
+            trie.insert_word(word, file_name)
 
 if __name__ == "__main__":
     # indexer()
-
     trie = Trie()
 
-    # files = ["10499.txt"]
-    files = ["dummyTest1.txt", "dummyTest2.txt"]
-    for filename in files:
-        with open(filename, "r") as file:
+    files = ["10499.txt"]
+    files += ["dummyTest1.txt", "dummyTest2.txt"]
+    for file_name in files:
+        with open(file_name, "r") as file:
             for line in file:
-                insert_line(line)
+                insert_line(line, file_name)
 
     #  Precisa dar 'pip install lolviz' e descomentar a declaração da função ali em cima. Recomendo venv.
-    # Gera um PDF e demora um pouco, é bem pesado
-    DEB_viz(trie)
+    # Gera um PDF e demora um pouco, é bem pesado SERVE SÓ PRA DEBUGAR 
+    # DEB_viz(trie.root['t']['h']['e'])
     
     # words = ["felipe", "feliz"]
 
