@@ -36,5 +36,6 @@ class Trie:
             if letter not in current_node:
                 return False
             current_node = current_node[letter]
+            word_obj = current_node.get("word", None)
 
-        return "word" in current_node
+        return word_obj

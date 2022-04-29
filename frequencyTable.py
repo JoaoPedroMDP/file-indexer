@@ -9,7 +9,7 @@ class FrequencyTable:
     def print(self):
         for i in range(self.table_size - 1, 0, -1):
             if self.table[i] is not None:
-                print("{} - Frequência {}".format(self.table[i].word, self.table[i].overall_frequency))
+                print("{} - Frequencia {}".format(self.table[i].word, self.table[i].overall_frequency))
 
     def search_word(self, word):
         for i in range(self.table_size):

@@ -3,7 +3,7 @@ import argparse
 
 from utils import DEB_viz, sanitize_line, hash_string
 from trie import Trie
-from functions import freq
+from functions import freq, freq_word
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", "--freq",
@@ -36,8 +36,8 @@ def indexer(frequency, word_frequency, search_word, files):
     trie = Trie(files)
     if frequency is not None:
         freq(trie=trie, frequency=int(frequency))
-    # elif word_frequency is not None:
-    #     word_freq(trie=trie, word_frequency=word_frequency)
+    elif word_frequency is not None:
+        freq_word(trie=trie, word_frequency=word_frequency)
     # else:
     #     search(trie=trie, search_word=search_word)
 
