@@ -3,8 +3,10 @@ import re
 from word import Word
 from utils import sanitize_word
 class Trie:
-    def __init__(self):
+    def __init__(self, files):
         self.root = {}  # inicializando raiz
+        self.files = files
+        self.file_amount = len(files)
 
     def insert_word(self, word, file_name):
         current_node = self.root
@@ -22,7 +24,8 @@ class Trie:
             current_node["word"].word = word
             word_obj = current_node.get("word", None)
 
-        word_obj.add_instance(file_name)
+        word_obj.add_instance(file_name, self.file_amount)
+        return word_obj
 
     def word_exists(self, word):
         current_node = self.root

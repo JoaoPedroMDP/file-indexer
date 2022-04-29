@@ -16,12 +16,11 @@ def DEB_viz(object):
     viz = objviz(object)
     viz.view()
 
-def hash_string(string):
+def hash_string(string, table_range):
     hashed = 0
     chars = [char for char in string]
     for letter in chars:
-        hashed += ord(letter) % RANGE
+        hashed += ord(letter) % table_range
 
-    print("{} ficara na posicao {}".format(string, hashed % RANGE))
 
-    return str(hashed % RANGE)
+    return str(hashed % table_range)
