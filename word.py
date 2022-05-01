@@ -1,10 +1,12 @@
 # coding: utf-8
+from file import File
 from utils import hash_string
 
 class Word:
-    def __init__(self):
+    def __init__(self, trie_file_count: int):
         self.word = ""
-        self.files = {}
+        self.files = [None] * trie_file_count
+        self.file_count = 0
         self.overall_frequency = 0
 
     def __repr__(self):
@@ -13,14 +15,14 @@ class Word:
     def __str__(self) -> str:
         return "<Word: {}>".format(self.word)
 
-    def insert_file_name(self, file_name, table_range):
-        hashed_file_name = hash_string(file_name, table_range)
-        if hashed_file_name in self.files:
-            self.files[hashed_file_name] += 1
+    def insert_file_name(self, file: File):
+        if self.files[file.hashed_name] is not None:
+            self.files[file.hashed_name] += 1
         else:
-            self.files[hashed_file_name] = 1
+            self.file_count += 1
+            self.files[file.hashed_name] = 1
         
         self.overall_frequency+=1
 
-    def add_instance(self, file_name, table_range):
-        self.insert_file_name(file_name, table_range)
+    def add_instance(self, file: File):
+        self.insert_file_name(file)

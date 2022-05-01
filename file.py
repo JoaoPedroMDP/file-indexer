@@ -1,6 +1,9 @@
 # coding: utf-8
+from utils import hash_string
 
 class File:
-    def __init__(self, name, size):
-        self.name = name
-        self.size = size
+    def __init__(self, filename: str, hashed_name: int):
+        self.name = filename
+        self.word_count = 0
+        self.hashed_name = hashed_name
+

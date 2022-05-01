@@ -1,9 +1,7 @@
 # coding: utf-8
 import argparse
-
-from utils import DEB_viz, sanitize_line, hash_string
 from trie import Trie
-from functions import freq, freq_word
+from functions import freq, freq_word, search
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", "--freq",
@@ -38,11 +36,11 @@ def indexer(frequency, word_frequency, search_word, files):
         freq(trie=trie, frequency=int(frequency))
     elif word_frequency is not None:
         freq_word(trie=trie, word_frequency=word_frequency)
-    # else:
-    #     search(trie=trie, search_word=search_word)
+    elif search_word is not None:
+        search(trie=trie, search_word=search_word)
 
 if __name__ == "__main__":
-    files = ["dummyTest1.txt", "dummyTest2.txt"]
+    # files = ["dummyTest1.txt", "dummyTest2.txt"]
     indexer(frequency=frequency, word_frequency=word_frequency, search_word=search_word, files=files)
     #  Precisa dar 'pip install lolviz' e descomentar a declaração da função ali em cima. Recomendo venv.
     # Gera um PDF e demora um pouco, é bem pesado SERVE SÓ PRA DEBUGAR 
