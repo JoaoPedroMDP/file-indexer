@@ -30,14 +30,14 @@ class Trie:
         file.word_count += 1
         return word_obj
 
-    def word_exists(self, word):
+    def word_exists(self, word) -> Word:
         current_node = self.root
 
         word = sanitize_word(word)
 
         for letter in word:
             if letter not in current_node:
-                return False
+                return None
             current_node = current_node[letter]
             word_obj = current_node.get("word", None)
 
