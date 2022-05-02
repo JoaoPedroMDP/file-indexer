@@ -4,7 +4,7 @@
 
 ## Passo a passo
 - Clonar projeto
-`git clone <https://github.com/JoaoPedroMDP/file-indexer.git>`
+    - `git clone <https://github.com/JoaoPedroMDP/file-indexer.git>`
 - Executar script
 
 	- `python3 main.py --freq <frequencia> {arquivos}`
