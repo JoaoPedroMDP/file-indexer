@@ -24,10 +24,9 @@ def freq(trie: Trie, frequency):
 
 def freq_word(trie: Trie, word_frequency):
     for file_obj in trie.files:
-        with open(file_obj.name, "r") as file:
+        with open(file_obj.name, "r", encoding="ISO-8859-1") as file:
             for line in file:
                 line = sanitize_line(line)
-
                 for word in line:
                     if len(word) > 2:
                         trie.insert_word(word, file_obj)
@@ -50,7 +49,7 @@ def calc_idf(trie: Trie, word_obj: Word):
 
 def search(trie: Trie, search_word: Word):
     for file_obj in trie.files:
-        with open(file_obj.name, "r") as file:
+        with open(file_obj.name, "r", encoding="ISO-8859-1") as file:
             for line in file:
                 line = sanitize_line(line)
 
