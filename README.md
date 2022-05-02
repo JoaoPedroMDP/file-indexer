@@ -7,7 +7,7 @@
 `git clone <https://github.com/JoaoPedroMDP/file-indexer.git>`
 - Executar script
 
-	- `python3 main.py --freq <valor> {arquivos}`
+	- `python3 main.py --freq <frequencia> {arquivos}`
 
 	- `python3 main.py --freq-word <palavra> {arquivos}`
 
