@@ -77,11 +77,6 @@ def search(trie: Trie, search_word: Word):
     import operator
     files_tfidf = dict(sorted(files_tfidf.items(), key=operator.itemgetter(1), reverse=True))
 
-    for file.hashed_name in files_tfidf.keys():
-        print("TF-IDF Arquivo {}: {}".format(file.hashed_name, files_tfidf[file.hashed_name]))
-
-    # for file in trie.files:
-    #     if file.hashed_name in files_tfidf.keys():
-    #         print("{} - {}".format(file.name, files_tfidf[file.hashed_name]))
-    # average = sum(all_tfidf.values()) / len(all_tfidf)
-    # print("TF-IDF de '{}': {}".format(search_word, average))
+    for file in trie.files:
+        if file.hashed_name in files_tfidf.keys():
+            print("{} - {}".format(file.name, files_tfidf[file.hashed_name]))

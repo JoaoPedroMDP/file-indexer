@@ -47,8 +47,7 @@ class Trie:
         table_size = len(files_names)
         wrapped = [None] * table_size
 
-        for file in files_names:
-            hashed_name = hash_string(file, table_size)
-            wrapped[hashed_name] = File(file, hashed_name)
+        for i in range(len(files_names)):
+            wrapped[i] = File(files_names[i], i)
 
         return wrapped
